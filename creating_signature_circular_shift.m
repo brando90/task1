@@ -23,17 +23,16 @@ for k = 1:K;
 end
 
 [t_m, t_n] = size(templates);
-for k = 1:t_n;
-    t_k = templates(:, k);
-    %compute signature for template t_k
-    mu_k = zeros(N, 1);
-    for n = 1:N;
-        mu_k_n = compute_signature_component(I, t_k, n, G);
-        mu_k(n,1) = mu_k_n;
-    end
-end
-
-
+sigma_I = generate_signature(I, templates, G, N);
+gI = circ * I;
+sigma_gI = generate_signature(gI, templates, G, N);
 
 %compute distance between signatures:
+[~, m] = size(sigma_gI);
+for k = 1:m;
+    mu_k_I = sigma_I(:, k);
+    mu_k_gI = sigma_gI(:, k);
+    dis = norm( mu_k_I - mu_k_gi , 2);
+    disp(dis);
+end
 
