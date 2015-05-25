@@ -1,7 +1,6 @@
 function [ simga_I ] = generate_signature(I, templates, G, N)
 %generate_signature Summary = generates u_^k for signature t^k
 %   Detailed explanation =  generates u_^k for signature t^k
-
 [~, K] = size(templates);
 sigma_I = zeros(N, K);
 for k = 1:K;
@@ -14,6 +13,4 @@ for k = 1:K;
     end
     simga_I(:, k) = mu_k;
 end
-
 end
-
