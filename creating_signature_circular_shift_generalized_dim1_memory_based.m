@@ -9,24 +9,30 @@ G = generate_circular_shift(d);
 [~, ~, size_G] = size(G);
 
 %number of tempaltes
-K = 5;
+K = 10;
 %number of components in a signature
-N = 3;
+N = 10;
+
+% delta
+delta = 3;
 
 %generate random templates K
-templates_G = generate_random_tempaltes_transformed(d, K, G);
+templates = generate_random_virgin_templates(d, K );
 
 %generate signature S(I) and S(gI)
-sigma_I = generate_signature(I, templates, G, N);
-gI = G(1) * I;
-sigma_gI = generate_signature(gI, templates, G, N);
+sigma_I = generate_signature_memory_based(I, templates, G, N, delta);
+gI = G(5) * I;
+sigma_gI = generate_signature_memory_based(gI, templates, G, N, delta);
 
 %compute distance between signatures:
 [~, m] = size(sigma_gI);
+disp('Computing distance bewteen signatures');
 for k = 1:m;
     mu_k_I = sigma_I(:, k);
     mu_k_gI = sigma_gI(:, k);
     dis = norm( mu_k_I - mu_k_gI , 2);
+    disp('sginature number: ');
+    disp(k);
     disp(dis);
 end
 
